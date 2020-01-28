@@ -9,10 +9,10 @@ import javax.persistence.*;
 public class Producer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @Column(name = "product_count")
-    private String productCount;
+    private Integer productCount;
 
     public Producer() {
     }
@@ -33,11 +33,11 @@ public class Producer {
         this.id = id;
     }
 
-    public String getProductCount() {
+    public Integer getProductCount() {
         return productCount;
     }
 
-    public void setProductCount(String productCount) {
+    public void setProductCount(Integer productCount) {
         this.productCount = productCount;
     }
 }

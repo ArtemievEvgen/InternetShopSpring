@@ -71,7 +71,7 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
     @Override
     public void save(Account account) {
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
-        account.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        account.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
         accountRepository.save(account);
     }
 
@@ -96,6 +96,10 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
 
     public Account findByEmail(String email) {
         return accountRepository.findByEmail(email);
+    }
+
+    public Account findById(Long id) {
+        return accountRepository.findById(id).orElse(null);
     }
 
 

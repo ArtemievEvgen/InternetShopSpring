@@ -11,7 +11,7 @@ public class Category {
     private String name;
     private String url;
     @Column(name = "product_count")
-    private String productCount;
+    private Integer productCount;
 
     public Category() {
     }
@@ -40,11 +40,11 @@ public class Category {
         this.url = url;
     }
 
-    public String getProductCount() {
+    public Integer getProductCount() {
         return productCount;
     }
 
-    public void setProductCount(String productCount) {
+    public void setProductCount(Integer productCount) {
         this.productCount = productCount;
     }
 }

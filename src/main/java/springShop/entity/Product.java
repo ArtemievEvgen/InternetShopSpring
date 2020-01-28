@@ -1,6 +1,8 @@
 package springShop.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -12,7 +14,7 @@ public class Product {
     private String description;
     @Column(name = "image_link")
     private String imageLink;
-    private int price;
+    private Double price;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_category")
@@ -21,14 +23,14 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_producer")
     private Producer producer;
-
-//   @ManyToMany(mappedBy = "products")
-//    private Set<Order> order = new HashSet<>();
+//
+//   @ManyToMany(fetch = FetchType.EAGER)
+//    private Set<Order> order;
 
 
     public Product() {
     }
-    public Product(Category category,Producer producer, String name, int price){
+    public Product(Category category,Producer producer, String name, Double price){
         this.category = category;
         this.producer = producer;
         this.name = name;
@@ -67,11 +69,11 @@ public class Product {
         this.imageLink = imageLink;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

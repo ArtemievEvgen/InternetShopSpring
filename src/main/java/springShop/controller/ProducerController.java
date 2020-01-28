@@ -8,7 +8,6 @@ import springShop.service.impl.ProducerServiceImpl;
 
 import java.util.List;
 
-
 @RestController
 public class ProducerController {
     @Autowired

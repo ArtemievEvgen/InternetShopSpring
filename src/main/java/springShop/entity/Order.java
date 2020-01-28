@@ -2,20 +2,16 @@ package springShop.entity;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
-@Table(name = "order")
-
-public class Order implements Serializable {
+@Table(name = "orders")
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    @Column(name = "id")
+    private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_account")
     private Account account;
@@ -26,26 +22,25 @@ public class Order implements Serializable {
     @Column(name = "checked")
     private String checked;
 
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "order_product",
-            joinColumns = {@JoinColumn(name = "id_order")},
-            inverseJoinColumns = {@JoinColumn(name = "id_product")})
-    private Set<Product> products = new HashSet<>();
+//
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "order_product")
+//    private Set<Product> products ;
 
     public Order() {
     }
 
-    public int getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
+    public Integer getAccount() {
+        return account.getId();
     }
 
     public void setAccount(Account account) {
@@ -67,12 +62,13 @@ public class Order implements Serializable {
     public void setChecked(String checked) {
         this.checked = checked;
     }
+//
+//    public Set<Product> getProducts() {
+//        return products;
+//    }
+//
+//    public void setProducts(Set<Product> products) {
+//        this.products = products;
+//    }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
 }
