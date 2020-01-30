@@ -8,18 +8,18 @@ import javax.persistence.*;
 public class ProductComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "id_product")
-    private int idProduct;
+    private Integer idProduct;
     @Column(name = "id_account")
-    private int idAccount;
+    private Integer idAccount;
     private String comment;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -27,7 +27,7 @@ public class ProductComment {
         return idProduct;
     }
 
-    public void setIdProduct(int idProduct) {
+    public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }
 
@@ -35,7 +35,7 @@ public class ProductComment {
         return idAccount;
     }
 
-    public void setIdAccount(int idAccount) {
+    public void setIdAccount(Integer idAccount) {
         this.idAccount = idAccount;
     }
 

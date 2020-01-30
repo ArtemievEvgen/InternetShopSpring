@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springShop.dto.assembler.AccountAssembler;
+import springShop.dto.AccountDTO;
 import springShop.entity.Account;
 import springShop.service.impl.AccountServiceImpl;
 
@@ -20,7 +22,7 @@ public class AdminController {
     public List<Account> getAll(){return accountServiceImpl.findAll();}
 
     @PostMapping
-    public String deleteAccount(@RequestParam(required = true, defaultValue = "") Long accountId,
+    public String deleteAccount(@RequestParam(required = true, defaultValue = "") Integer accountId,
                                 @RequestParam(required = true, defaultValue = "") String action,
                                 Model model) {
         if (action.equals("delete")) {
@@ -30,15 +32,18 @@ public class AdminController {
     }
 
     @GetMapping("/gt/{accountId}")
-    public List<Account> gtAccount(@PathVariable("accountId") Long accountId/*, Model model*/) {
-        return accountServiceImpl.accountgtList(accountId);
+    public AccountDTO gtAccount(@PathVariable("accountId") Integer accountId/*, Model model*/) {
+        Account account = accountServiceImpl.findById(accountId);
+        AccountDTO dto = new AccountAssembler().toModel(account);
+        return dto;
         /*model.addAttribute("allAccounts",);
         return "";*/
     }
 
     @GetMapping("{accountId}")
-    public ResponseEntity<Account> findOne (@PathVariable Long accountId) {
+    public ResponseEntity<Account> findOne (@PathVariable Integer accountId) {
         return new ResponseEntity<>(accountServiceImpl.findById(accountId), HttpStatus.OK) ;
     }
+
 
 }

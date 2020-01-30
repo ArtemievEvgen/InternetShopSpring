@@ -14,8 +14,8 @@ import java.util.Set;
 public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", insertable = false, updatable = false, nullable = false)
-    private Long id;
+    @Column(name = "id"/*insertable = false, updatable = false, nullable = false*/)
+    private Integer id;
     @Column(name = "username")
     private String username;
     @Column(name = "password", nullable = false)
@@ -49,11 +49,11 @@ public class Account implements UserDetails {
         this.roles = roles;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -170,6 +170,24 @@ public class Account implements UserDetails {
         this.passwordConfirm = passwordConfirm;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordConfirm='" + passwordConfirm + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", zip='" + zip + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }
 
 

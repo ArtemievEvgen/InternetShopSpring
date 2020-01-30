@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import springShop.entity.OrderItem;
 
 @Repository
-public interface OrderItemRepository extends CrudRepository<OrderItem, Integer>, JpaRepository<OrderItem, Integer> {
+public interface OrderItemRepository extends  JpaRepository<OrderItem, Integer> {
 }

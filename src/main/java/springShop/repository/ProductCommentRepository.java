@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import springShop.entity.ProductComment;
 
 @Repository
-public interface ProductCommentRepository extends CrudRepository<ProductComment, Integer>, JpaRepository<ProductComment, Integer> {
+public interface ProductCommentRepository extends  JpaRepository<ProductComment, Integer> {
 }

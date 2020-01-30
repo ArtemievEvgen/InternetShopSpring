@@ -9,7 +9,7 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_order")
@@ -19,16 +19,16 @@ public class OrderItem {
     @JoinColumn(name = "id_product")
     private Product product;
 
-    private int count;
+    private Integer count;
 
     public OrderItem() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class OrderItem {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 }

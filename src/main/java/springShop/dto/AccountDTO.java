@@ -2,10 +2,9 @@ package springShop.dto;
 
 import org.springframework.hateoas.RepresentationModel;
 
-public class AccountDTO extends RepresentationModel {
+public class AccountDTO extends RepresentationModel<AccountDTO> {
 
     private String userName;
-    private String password;
     private String firstName;
     private String lastName;
     private String email;
@@ -20,7 +19,7 @@ public class AccountDTO extends RepresentationModel {
 
     public AccountDTO(String userName, String password, String firstName, String lastName, String email, String phoneNumber, String address, String city, String country, String zip) {
         this.userName = userName;
-        this.password = password;
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -39,13 +38,6 @@ public class AccountDTO extends RepresentationModel {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getFirstName() {
         return firstName;

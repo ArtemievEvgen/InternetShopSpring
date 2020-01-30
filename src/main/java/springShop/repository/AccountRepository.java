@@ -12,8 +12,9 @@ import java.util.List;
 
 
 @Repository
-public interface AccountRepository extends CrudRepository<Account, Long>, JpaRepository<Account, Long>
+public interface AccountRepository extends  JpaRepository<Account, Integer>
 {
+
 
     Account findByUsername(String username);
 
@@ -21,8 +22,8 @@ public interface AccountRepository extends CrudRepository<Account, Long>, JpaRep
 
 
 
-   @Query("SELECT u FROM Account u WHERE u.id > :paramId")
-   List<Account> accountList(@Param("paramId") Long id);
+   @Query("SELECT u FROM Account u WHERE u.id = :paramId")
+   List<Account> accountList(@Param("paramId") Integer id);
 
 
 }

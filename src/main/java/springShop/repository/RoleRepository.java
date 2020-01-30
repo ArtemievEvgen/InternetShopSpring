@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import springShop.entity.Role;
 
 @Repository
-public interface RoleRepository extends CrudRepository<Role, Integer>, JpaRepository<Role, Integer> {
+public interface RoleRepository extends  JpaRepository<Role, Integer> {
 }
