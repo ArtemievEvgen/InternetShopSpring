@@ -35,8 +35,7 @@ public class OrderController {
                 .map(assembler::toResource)
                 .collect(Collectors.toList());
 
-        return new Resources<>(orders,
-                linkTo(methodOn(OrderController.class).all()).withSelfRel());
+        return new Resources<>(orders, linkTo(methodOn(OrderController.class).all()).withSelfRel());
     }
 
     @GetMapping("/orders/{id}")
