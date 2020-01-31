@@ -3,7 +3,6 @@ package springShop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,8 @@ import springShop.service.AccountService;
 import springShop.service.SecurityService;
 import springShop.validator.UserValidator;
 
-import javax.validation.Valid;
+import java.net.URI;
+
 
 @RestController
 public class UserController {
@@ -52,19 +52,32 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") Integer id, @RequestBody Account account,
-                                        BindingResult result, Model model) {
-        Account accountUp = accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid account Id:" + id));
+    public ResponseEntity<?> updateAccount(@PathVariable("id") Integer id, @RequestBody Account newAccount
+                                        ) {
+        Account updatedAccount = accountRepository.findById(id).map(account -> {
+            account.setName(newAccount.getName());
+            account.setRole(newAccount.getRole());
+            return accountRepository.save(account);
+        })
+                .orElseGet(() -> {
+                    newAccount.setId(id);
+                    return accountRepository.save(newAccount);
+                });
+        Resource<Account> resource = assembler.toResource(updatedAccount);
+
+        return ResponseEntity
+                .created(new URI(resource.getId().expand().getHref()))
+                .body(resource);/*.orElseThrow(() -> new IllegalArgumentException("Invalid account Id:" + id));*/
 //        if (result.hasErrors()) {
 //            account.setId(id);
 //            return new ResponseEntity<String>("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
 //        }
 
-//        accountService.saveUpdate( id, account );
+//        accountService.saveUpdate( updateAccount );
 //        model.addAttribute("account", accountRepository.findAll());
 //        return new ResponseEntity<Account>(account, HttpStatus.OK);
-        return accountService.update(account, id);
     }
+
 
 
     @GetMapping("/delete/{id}")

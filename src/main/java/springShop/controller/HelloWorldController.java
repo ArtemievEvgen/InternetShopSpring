@@ -1,5 +1,6 @@
 package springShop.controller;
 
+import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import springShop.validator.UserValidator;
 
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
-
+@Logger
 @RestController
 class HelloWorldController {
 

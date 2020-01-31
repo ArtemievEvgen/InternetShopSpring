@@ -7,4 +7,5 @@ import springShop.entity.OrderItem;
 
 @Repository
 public interface OrderItemRepository extends  JpaRepository<OrderItem, Integer> {
+    boolean existsById(Integer id);
 }

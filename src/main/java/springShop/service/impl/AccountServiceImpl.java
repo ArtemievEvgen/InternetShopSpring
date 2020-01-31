@@ -54,17 +54,17 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
         return accountRepository.findAll();
     }
 
-    @Override
-    public Account update(Account account, int id) {
-        return accountRepository.save(account);
-    }
 //    @Override
-//    public void saveUpdate(int id, Account account) {
-//        account.setFirstName(account.getFirstName());
-//        account.setLastName(account.getLastName());
-//        account.setEmail(account.getEmail());
-//        accountRepository.save(account);
+//    public Account update(Account account, int id) {
+//        return accountRepository.save(account);
 //    }
+    @Override
+    public void saveUpdate(int id, Account account) {
+        account.setFirstName(account.getFirstName());
+        account.setLastName(account.getLastName());
+        account.setEmail(account.getEmail());
+        accountRepository.save(account);
+    }
 
    @Override
     public void save(Account account) {
