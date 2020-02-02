@@ -21,6 +21,20 @@ public class AdminController {
     @GetMapping
     public List<Account> getAll(){return accountServiceImpl.findAll();}
 
+    @GetMapping("/{accountId}")
+    public AccountDTO gtAccount(@PathVariable("accountId") Integer accountId/*, Model model*/) {
+        Account account = accountServiceImpl.findById(accountId);
+        AccountDTO dto = new AccountAssembler().toModel(account);
+        return dto;
+        /*model.addAttribute("allAccounts",);
+        return "";*/
+    }
+
+//    @GetMapping("{accountId}")
+//    public ResponseEntity<?> findOne (@PathVariable Integer accountId) {
+//        return new ResponseEntity<>(accountServiceImpl.findById(accountId), HttpStatus.OK) ;
+//    }
+
     @PostMapping
     public String deleteAccount(@RequestParam(required = true, defaultValue = "") Integer accountId,
                                 @RequestParam(required = true, defaultValue = "") String action,
@@ -31,19 +45,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/gt/{accountId}")
-    public AccountDTO gtAccount(@PathVariable("accountId") Integer accountId/*, Model model*/) {
-        Account account = accountServiceImpl.findById(accountId);
-        AccountDTO dto = new AccountAssembler().toModel(account);
-        return dto;
-        /*model.addAttribute("allAccounts",);
-        return "";*/
-    }
 
-    @GetMapping("{accountId}")
-    public ResponseEntity<Account> findOne (@PathVariable Integer accountId) {
-        return new ResponseEntity<>(accountServiceImpl.findById(accountId), HttpStatus.OK) ;
-    }
+
+
 
 
 }

@@ -19,7 +19,6 @@ public class AccountDTO extends RepresentationModel<AccountDTO> {
 
     public AccountDTO(String userName, String password, String firstName, String lastName, String email, String phoneNumber, String address, String city, String country, String zip) {
         this.userName = userName;
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

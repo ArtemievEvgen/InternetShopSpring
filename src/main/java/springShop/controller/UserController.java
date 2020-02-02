@@ -1,6 +1,7 @@
 package springShop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -52,30 +53,12 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateAccount(@PathVariable("id") Integer id, @RequestBody Account newAccount
-                                        ) {
-        Account updatedAccount = accountRepository.findById(id).map(account -> {
-            account.setName(newAccount.getName());
-            account.setRole(newAccount.getRole());
-            return accountRepository.save(account);
-        })
-                .orElseGet(() -> {
-                    newAccount.setId(id);
-                    return accountRepository.save(newAccount);
-                });
-        Resource<Account> resource = assembler.toResource(updatedAccount);
-
-        return ResponseEntity
-                .created(new URI(resource.getId().expand().getHref()))
-                .body(resource);/*.orElseThrow(() -> new IllegalArgumentException("Invalid account Id:" + id));*/
-//        if (result.hasErrors()) {
-//            account.setId(id);
-//            return new ResponseEntity<String>("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
-//        }
-
-//        accountService.saveUpdate( updateAccount );
-//        model.addAttribute("account", accountRepository.findAll());
-//        return new ResponseEntity<Account>(account, HttpStatus.OK);
+    public ResponseEntity<EntityModel<Account>> newAccount(@RequestBody Account account) {
+        Account savedAccount = accountRepository.save(account);
+        return savedAccount.getId() //
+                .map(id -> ResponseEntity.created( //
+                        linkTo(methodOn(UserController.class).findOne(id)).toUri()).body(assembler.toModel(savedAccount)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 
@@ -87,5 +70,10 @@ public class UserController {
         accountRepository.delete(account);
         model.addAttribute("accounts", accountRepository.findAll());
         return "index";
+    }
+
+    @DeleteMapping("/{id}")
+    void deleteEmployee(@PathVariable Integer id) {
+        accountRepository.deleteById(id);
     }
 }

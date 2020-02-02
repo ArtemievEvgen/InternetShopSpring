@@ -1,12 +1,13 @@
 package springShop.dto.assembler;
 
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import org.springframework.stereotype.Component;
 import springShop.controller.AdminController;
 import springShop.dto.AccountDTO;
 import springShop.entity.Account;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
+@Component
 public class AccountAssembler extends RepresentationModelAssemblerSupport<Account, AccountDTO> {
 
     public AccountAssembler() {
