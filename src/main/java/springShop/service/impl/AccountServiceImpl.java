@@ -26,9 +26,6 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
     AccountRepository accountRepository;
 
     @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -45,57 +42,33 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
         return new User(account.getUsername(), account.getPassword(), grantedAuthorities);
     }
 
-    public Account findAccountById(Integer accountId) {
-        Optional<Account> accountFromDb = accountRepository.findById(accountId);
-        return accountFromDb.orElse(new Account());   //orElseThrow
-    }
-
-    public List<Account> findAll() {
-        return accountRepository.findAll();
-    }
-
-//    @Override
-//    public Account update(Account account, int id) {
-//        return accountRepository.save(account);
-//    }
-    @Override
-    public void saveUpdate(int id, Account account) {
-        account.setFirstName(account.getFirstName());
-        account.setLastName(account.getLastName());
-        account.setEmail(account.getEmail());
-        accountRepository.save(account);
-    }
-
    @Override
     public void save(Account account) {
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
         account.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
         accountRepository.save(account);
     }
+
     @Override
-    public Account findByUsername(String username) {
-        return accountRepository.findByUsername(username);
+    public Account update(Account newAccount, Integer id) {
+        return accountRepository.findById(id)
+                .map(account -> {
+                    account.setFirstName(newAccount.getFirstName());
+                    account.setLastName(newAccount.getLastName());
+                    account.setPhoneNumber(newAccount.getPhoneNumber());
+                    account.setAddress(newAccount.getAddress());
+                    account.setCity(newAccount.getCity());
+                    account.setCountry(newAccount.getCountry());
+                    account.setZip(newAccount.getZip());
+                    account.setRoles(newAccount.getRoles());
+                    return accountRepository.save(account);
+                })
+                .orElseGet(() -> {
+                    newAccount.setId(id);
+                    return accountRepository.save(newAccount);
+                });
     }
-
-    public boolean deleteAccount(Integer accountId) {
-        if (accountRepository.findById(accountId).isPresent()) {
-            accountRepository.deleteById(accountId);
-            return true;
-        }
-        return false;
-    }
-
-    public List<Account> accountgtList(Integer idMin) {
-        return accountRepository.accountList(idMin);
-    }
-
-    public Account findByEmail(String email) {
-        return accountRepository.findByEmail(email);
-    }
-
     public Account findById(Integer id) {
         return accountRepository.findById(id).orElse(null);
     }
-
-
 }

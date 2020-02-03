@@ -3,11 +3,12 @@ package springShop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import springShop.dto.assembler.AccountAssembler;
 import springShop.dto.AccountDTO;
+import springShop.dto.assembler.AccountAssembler;
 import springShop.entity.Account;
+import springShop.repository.AccountRepository;
+import springShop.service.AccountService;
 import springShop.service.impl.AccountServiceImpl;
 
 import java.util.List;
@@ -18,36 +19,37 @@ public class AdminController {
     @Autowired
     private AccountServiceImpl accountServiceImpl;
 
-    @GetMapping
-    public List<Account> getAll(){return accountServiceImpl.findAll();}
+    @Autowired
+    private AccountRepository accountRepository;
 
-    @GetMapping("/{accountId}")
-    public AccountDTO gtAccount(@PathVariable("accountId") Integer accountId/*, Model model*/) {
-        Account account = accountServiceImpl.findById(accountId);
+    @Autowired
+    private AccountService accountService;
+
+    @GetMapping
+    public List<Account> getAll() {
+        return accountRepository.findAll();
+    }
+
+    @PostMapping("/newAccount")
+    public Account newAccount(@RequestBody Account newAccount) {
+        return accountRepository.save(newAccount);
+    }
+
+    @GetMapping("/Account/{id}")
+    public AccountDTO Account(@PathVariable("id") Integer id) {
+        Account account = accountServiceImpl.findById(id);
         AccountDTO dto = new AccountAssembler().toModel(account);
         return dto;
-        /*model.addAttribute("allAccounts",);
-        return "";*/
     }
 
-//    @GetMapping("{accountId}")
-//    public ResponseEntity<?> findOne (@PathVariable Integer accountId) {
-//        return new ResponseEntity<>(accountServiceImpl.findById(accountId), HttpStatus.OK) ;
-//    }
-
-    @PostMapping
-    public String deleteAccount(@RequestParam(required = true, defaultValue = "") Integer accountId,
-                                @RequestParam(required = true, defaultValue = "") String action,
-                                Model model) {
-        if (action.equals("delete")) {
-            accountServiceImpl.deleteAccount(accountId);
-        }
-        return "redirect:/admin";
+    @PutMapping("/account/{id}")
+    public Account updateAccount(@RequestBody Account newAccount, @PathVariable Integer id) {
+        accountService.update(newAccount,id);
+        return newAccount;
     }
 
-
-
-
-
-
+    @DeleteMapping("/{id}")
+    void deleteAccount(@PathVariable Integer id) {
+        accountRepository.deleteById(id);
+    }
 }

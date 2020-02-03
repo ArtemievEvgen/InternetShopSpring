@@ -6,12 +6,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import springShop.entity.Account;
+import springShop.repository.AccountRepository;
 import springShop.service.AccountService;
 
 @Component
 public class UserValidator implements Validator {
     @Autowired
-    private AccountService accountService;
+    private AccountRepository accountRepository;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -26,7 +27,7 @@ public class UserValidator implements Validator {
         if (account.getUsername().length() < 6 || account.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.accountForm.username");
         }
-        if (accountService.findByUsername(account.getUsername()) != null) {
+        if (accountRepository.findByUsername(account.getUsername()) != null) {
             errors.rejectValue("username", "Duplicate.accountForm.username");
         }
 

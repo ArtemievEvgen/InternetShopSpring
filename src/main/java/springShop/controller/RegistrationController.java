@@ -65,12 +65,12 @@ public class RegistrationController {
 //    }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("accountForm") Account accountForm, BindingResult bindingResult) {
+    public String registration(@RequestBody Account accountForm, BindingResult bindingResult) {
         userValidator.validate(accountForm, bindingResult);
 
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
+//        if (bindingResult.hasErrors()) {
+//            return "registration";
+//        }
 
         accountService.save(accountForm);
 

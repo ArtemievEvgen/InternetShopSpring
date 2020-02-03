@@ -12,7 +12,4 @@ public class ProductCommentsServiceImpl {
     @Autowired
     private ProductCommentRepository productCommentRepository;
 
-    public List<ProductComment> findAll() {
-        return productCommentRepository.findAll();
-    }
 }

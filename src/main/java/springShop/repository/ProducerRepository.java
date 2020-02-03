@@ -6,6 +6,6 @@ import springShop.entity.Producer;
 
 @Repository
 public interface ProducerRepository extends  JpaRepository<Producer, Integer> {
-//    List<Producer> findAll(Sort sort);
+
 
 }

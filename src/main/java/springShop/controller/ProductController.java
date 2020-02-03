@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springShop.entity.Account;
-import springShop.entity.Order;
-import springShop.entity.Producer;
-import springShop.entity.Product;
+import springShop.entity.*;
+import springShop.repository.ProducerRepository;
+import springShop.repository.ProductRepository;
+import springShop.service.ProductService;
 import springShop.service.impl.ProductServiceImpl;
 
 import java.util.List;
@@ -18,15 +18,28 @@ public class ProductController {
 
     @Autowired
     ProductServiceImpl productServiceImpl;
-
+    @Autowired
+    ProductRepository productRepository;
+@Autowired
+ProductService productService;
     @GetMapping
     public List<Product> getAll() {
-        return productServiceImpl.findAll();
+        return productRepository.findAll();
     }
 
-    @GetMapping("/id/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable Integer productId) {
-        return new ResponseEntity<>(productServiceImpl.findById(productId), HttpStatus.OK);
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable Integer id) {
+        return new ResponseEntity<>(productRepository.findById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/newProduct")
+    public Product newProduct(@RequestBody Product newProduct) {
+        return productRepository.save(newProduct);
+    }
+
+    @DeleteMapping("/{id}")
+    void deleteProduct(@PathVariable Integer id) {
+        productRepository.deleteById(id);
     }
 
     @GetMapping("/min/{price}")
@@ -43,19 +56,22 @@ public class ProductController {
     public List<Product> eqPrice(@PathVariable("price") Double price) {
         return productServiceImpl.eqPriceList(price);
     }
-
-    @GetMapping("/category/{category}")
-    public List<Product> categoryList(@PathVariable("category") String category) {
-        return productServiceImpl.categoryList(category);
-    }
-
-    @GetMapping("/producer/{producer}")
-    public List<Product> producerList(@PathVariable("producer") Producer producer) {
-        return productServiceImpl.producerList(producer);
-    }
-//    @GetMapping("/category/{productCategory}")
-//    public ResponseEntity<Product> getProductByCategory(@PathVariable String productCategory){return new ResponseEntity<>(productServiceImpl.findByCategory(),HttpStatus.OK);}
 //
+//    @GetMapping("/category/{category}")
+//    public List<Product> categoryList(@PathVariable("category") String category) {
+//        return productServiceImpl.categoryList(category);
+//    }
+
+//    @GetMapping("/producer/{producer}")
+//    public List<Product> producerList(@PathVariable("producer") Producer producer) {
+//        return productServiceImpl.producerList(producer);
+//    }
+    @GetMapping("/category/{productCategory}")
+    public ResponseEntity<?> getProductByCategory(@PathVariable String productCategory){return new ResponseEntity<>(productRepository.categoryList(productCategory),HttpStatus.OK);}
+
+    @GetMapping("/producer/{productProducer}")
+    public ResponseEntity<?> getProductByProducer(@PathVariable String productProducer){return new ResponseEntity<>(productRepository.producerList(productProducer),HttpStatus.OK);}
+
 //    @GetMapping("/producer/{productProducer}")
 //    public ResponseEntity<Product> getProductByProducer(@PathVariable String productProducer){return new ResponseEntity<>(productServiceImpl.findByProducer(productProducer),HttpStatus.OK);}
 

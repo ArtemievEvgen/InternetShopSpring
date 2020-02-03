@@ -12,7 +12,4 @@ public class ProducerServiceImpl {
     @Autowired
     private ProducerRepository producerRepository;
 
-    public List<Producer> findAll() {
-        return producerRepository.findAll();
-    }
 }

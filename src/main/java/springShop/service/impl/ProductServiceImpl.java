@@ -24,13 +24,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProducerRepository producerRepository;
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
-    }
-
-    public Product findById(Integer id) {
-        return productRepository.findById(id).orElse(null);
-    }
 
     public List<Product> minPriceList(Double price) {
         return productRepository.minPriceList(price);
@@ -42,8 +35,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.eqPriceList(price);
     }
 
-    public List<Product> categoryList(String category){return productRepository.categoryList(category);}
-    public List<Product> producerList(Producer producer){return productRepository.producerList(producer);}
+//    public List<?> categoryList(String productCategory){return productRepository.categoryList(productCategory);}
+//    public List<Product> producerList(Producer producer){return productRepository.producerList(producer);}
+
 //
 //    public Product findByPrice(Double price){return productRepository.findByPrice(price);}
 //

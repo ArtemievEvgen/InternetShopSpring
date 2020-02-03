@@ -14,11 +14,4 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public List<Order> findAll() {
-        return orderRepository.findAll();
-    }
-
-    public Order findById(Integer id) {
-        return orderRepository.findById(id).orElse(null);
-    }
 }

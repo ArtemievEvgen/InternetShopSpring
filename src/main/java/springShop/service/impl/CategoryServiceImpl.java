@@ -12,7 +12,4 @@ public class CategoryServiceImpl {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
-    }
 }

@@ -12,7 +12,4 @@ public class OrderItemServiceImpl {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    public List<OrderItem> findAll() {
-        return orderItemRepository.findAll();
-    }
 }
