@@ -3,15 +3,14 @@ package springShop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springShop.entity.Order;
 import springShop.repository.OrderRepository;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
+@RolesAllowed("ROLE_ADMIN")
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -27,6 +26,10 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public ResponseEntity<?> findOne (@PathVariable Integer orderId) {
         return new ResponseEntity<>(orderRepository.findById(orderId), HttpStatus.OK) ;
+    }
+
+    @DeleteMapping("/{id}")
+    void deleteOrder(@PathVariable Integer id) {orderRepository.deleteById(id);
     }
 //
 //    @GetMapping("/orders")

@@ -14,4 +14,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Override
+    public Order update(Order newOrder, Integer id) {
+        return null;
+    }
 }

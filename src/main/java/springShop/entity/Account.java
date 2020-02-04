@@ -4,6 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Set;
 
@@ -19,6 +22,7 @@ public class Account implements UserDetails {
     @Column(name = "username")
     private String username;
     @Column(name = "password", nullable = false)
+    @Min(value = 18, message = "Age should not be less than 18")
     private String password;
     @Transient
     private String passwordConfirm;
@@ -27,6 +31,7 @@ public class Account implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "email")
+    @Email(message = "Email should be valid")@NotEmpty
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;

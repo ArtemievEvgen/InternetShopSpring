@@ -3,7 +3,6 @@ package springShop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import springShop.entity.Account;
 import springShop.entity.Role;
 import springShop.repository.AccountRepository;
-import springShop.repository.RoleRepository;
 import springShop.service.AccountService;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class AccountServiceImpl implements AccountService,UserDetailsService {
@@ -68,6 +68,7 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
                     return accountRepository.save(newAccount);
                 });
     }
+
     public Account findById(Integer id) {
         return accountRepository.findById(id).orElse(null);
     }

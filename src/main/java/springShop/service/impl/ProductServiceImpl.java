@@ -35,6 +35,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.eqPriceList(price);
     }
 
+    @Override
+    public Product update(Product newProduct, Integer id) {
+        return null;
+    }
+
 //    public List<?> categoryList(String productCategory){return productRepository.categoryList(productCategory);}
 //    public List<Product> producerList(Producer producer){return productRepository.producerList(producer);}
 

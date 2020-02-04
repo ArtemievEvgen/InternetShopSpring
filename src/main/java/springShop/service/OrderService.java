@@ -1,6 +1,8 @@
 package springShop.service;
 
 
-public interface OrderService {
+import springShop.entity.Order;
 
+public interface OrderService {
+    Order update(Order newOrder, Integer id);
 }

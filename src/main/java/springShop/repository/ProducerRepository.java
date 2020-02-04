@@ -6,6 +6,4 @@ import springShop.entity.Producer;
 
 @Repository
 public interface ProducerRepository extends  JpaRepository<Producer, Integer> {
-
-
 }
