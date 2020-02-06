@@ -64,20 +64,6 @@ public class RegistrationController {
 //        return "registration";
 //    }
 
-    @PostMapping("/registration")
-    public String registration(@RequestBody Account accountForm, BindingResult bindingResult) {
-        userValidator.validate(accountForm, bindingResult);
-
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
-
-        accountService.save(accountForm);
-
-        securityService.autoLogin(accountForm.getUsername(), accountForm.getPasswordConfirm());
-
-        return "redirect:/welcome";
-    }
 
     @PostMapping("/login")
     public String login(Model model, String error, String logout) {

@@ -20,11 +20,12 @@ import springShop.service.SecurityService;
 import springShop.service.impl.AccountServiceImpl;
 import springShop.validator.UserValidator;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
 @Logger
 @RestController
-class HelloWorldController {
+class SignInController {
 
     @Qualifier("authenticationManagerBean")
     @Autowired
@@ -42,7 +43,7 @@ class HelloWorldController {
         return "Hello World";
     }
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping("/sign-in")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         try {

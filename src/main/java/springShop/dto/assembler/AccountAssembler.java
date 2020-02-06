@@ -2,7 +2,7 @@ package springShop.dto.assembler;
 
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
-import springShop.controller.AdminController;
+import springShop.controller.AccountController;
 import springShop.dto.AccountDTO;
 import springShop.entity.Account;
 
@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class AccountAssembler extends RepresentationModelAssemblerSupport<Account, AccountDTO> {
 
     public AccountAssembler() {
-        super(AdminController.class, AccountDTO.class);
+        super(AccountController.class, AccountDTO.class);
     }
 
     @Override
@@ -29,8 +29,8 @@ public class AccountAssembler extends RepresentationModelAssemblerSupport<Accoun
         dto.setCity(entity.getCity());
         dto.setCountry(entity.getCountry());
         dto.setZip(entity.getZip());
-        dto.add(linkTo(methodOn(AdminController.class).getAll()).withRel("get all"),
-                linkTo(methodOn(AdminController.class).deleteAccount(entity.getId())).withRel("delete"));
+        dto.add(linkTo(methodOn(AccountController.class).getAll()).withRel("get all"),
+                linkTo(methodOn(AccountController.class).deleteAccount(entity.getId())).withRel("delete"));
         return dto;
     }
 }

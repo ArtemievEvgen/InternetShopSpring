@@ -11,7 +11,7 @@ import javax.annotation.security.RolesAllowed;
 import java.util.List;
 @RolesAllowed("ROLE_ADMIN")
 @RestController
-@RequestMapping("/orderItem")
+@RequestMapping("/order-items")
 public class OrderItemController {
 
     @Autowired

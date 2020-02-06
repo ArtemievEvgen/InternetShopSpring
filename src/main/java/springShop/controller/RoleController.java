@@ -20,14 +20,4 @@ public class RoleController {
     public List<Role> getAll() {
         return roleRepository.findAll();
     }
-
-    @PostMapping
-    public Role newRole(@RequestBody Role newRole) {
-        return roleRepository.save(newRole);
-    }
-
-    @DeleteMapping("/{roleId}")
-    void deleteRole(@PathVariable Integer id) {
-        roleRepository.deleteById(id);
-    }
 }

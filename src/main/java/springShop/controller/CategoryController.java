@@ -3,6 +3,7 @@ package springShop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springShop.entity.Category;
+import springShop.repository.CategoryRepository;
 import springShop.service.impl.CategoryServiceImpl;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,15 +15,15 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private CategoryServiceImpl categoryService;
+    private CategoryRepository categoryRepository;
 
     @GetMapping
     public List<Category> getAll() {
-        return categoryService.findAll();
+        return categoryRepository.findAll();
     }
 
     @DeleteMapping("/{categoryId}")
     void deleteCategory(@PathVariable Integer id) {
-        categoryService.deleteById(id);
+        categoryRepository.deleteById(id);
     }
 }
