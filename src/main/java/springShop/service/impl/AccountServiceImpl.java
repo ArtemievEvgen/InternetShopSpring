@@ -1,6 +1,9 @@
 package springShop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -11,23 +14,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springShop.entity.Account;
-import springShop.entity.Product;
 import springShop.entity.Role;
 import springShop.repository.AccountRepository;
 import springShop.service.AccountService;
-import springShop.specification.dao.UserSearchQueryCriteriaConsumer;
-import springShop.specification.util.SearchCriteria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.MessageFormat;
+import java.util.*;
+import java.util.function.Predicate;
+
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 @Service
 public class AccountServiceImpl implements AccountService,UserDetailsService {
@@ -98,18 +95,4 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
         return accountRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public List<Account> searchUser(final List<SearchCriteria> params) {
-        final CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        final CriteriaQuery<Account> query = builder.createQuery(Account.class);
-        final Root r = query.from(User.class);
-
-        Predicate predicate = builder.conjunction();
-        UserSearchQueryCriteriaConsumer searchConsumer = new UserSearchQueryCriteriaConsumer(predicate, builder, r);
-        params.stream().forEach(searchConsumer);
-        predicate = searchConsumer.getPredicate();
-        query.where(predicate);
-
-        return entityManager.createQuery(query).getResultList();
-    }
 }

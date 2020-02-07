@@ -29,7 +29,7 @@ public class AccountAssembler extends RepresentationModelAssemblerSupport<Accoun
         dto.setCity(entity.getCity());
         dto.setCountry(entity.getCountry());
         dto.setZip(entity.getZip());
-        dto.add(linkTo(methodOn(AccountController.class).getAll()).withRel("get all"),
+        dto.add(linkTo(methodOn(AccountController.class).getAll(null, null)).withRel("get all"),
                 linkTo(methodOn(AccountController.class).deleteAccount(entity.getId())).withRel("delete"));
         return dto;
     }

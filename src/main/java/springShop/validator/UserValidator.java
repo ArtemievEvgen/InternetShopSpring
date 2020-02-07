@@ -27,10 +27,10 @@ public class UserValidator implements Validator {
         if (account.getUsername().length() < 6 || account.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.accountForm.username");
         }
+
         if (accountRepository.findByUsername(account.getUsername()) != null) {
             errors.rejectValue("username", "Duplicate.accountForm.username");
         }
-
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
         if (account.getPassword().length() < 3 || account.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.accountForm.password");

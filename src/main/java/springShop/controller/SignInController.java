@@ -55,7 +55,6 @@ class SignInController {
             throw new Exception("Incorrect username or password", e);
         }
 
-
         final UserDetails userDetails = accountServiceImpl
                 .loadUserByUsername(authenticationRequest.getUsername());
 

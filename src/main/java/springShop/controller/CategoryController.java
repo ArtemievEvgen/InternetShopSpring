@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springShop.entity.Category;
 import springShop.repository.CategoryRepository;
-import springShop.service.impl.CategoryServiceImpl;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;

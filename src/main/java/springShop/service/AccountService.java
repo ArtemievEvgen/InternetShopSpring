@@ -1,10 +1,6 @@
 package springShop.service;
 
 import springShop.entity.Account;
-import springShop.repository.AccountRepository;
-import springShop.specification.util.SearchCriteria;
-
-import java.util.List;
 
 public interface AccountService  {
     void save(Account account);
@@ -15,5 +11,4 @@ public interface AccountService  {
 
     public Account findById(Integer id);
 
-    List<Account> searchUser(List<SearchCriteria> params);
 }
