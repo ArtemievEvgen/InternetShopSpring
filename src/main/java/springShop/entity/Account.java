@@ -9,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
@@ -25,25 +27,49 @@ public class Account implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id"/*insertable = false, updatable = false, nullable = false*/)
     private Integer id;
+
+    @NotEmpty @NotNull
     @Column(name = "username")
     private String username;
-    @Column(name = "password", nullable = false)
 
+    @Column(name = "password")
+    @Min(value = 3,message = "Password must not be less than 3 characters")
+    @NotEmpty @NotNull
     private String password;
     @Transient
     private String passwordConfirm;
+
+    @NotEmpty @NotNull
     @Column(name = "first_name")
     private String firstName;
+
+    @NotEmpty @NotNull
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "email")
-    @Email(message = "Email should be valid") @NotEmpty
+    @NotEmpty @NotNull
+    @Email(message = "Email should be valid")
     private String email;
+
+
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @NotEmpty @NotNull
+    @Column(name = "address")
     private String address;
+
+    @NotEmpty @NotNull
+    @Column(name = "city")
     private String city;
+
+    @NotEmpty @NotNull
+    @Column(name = "country")
     private String country;
+
+    @NotEmpty @NotNull
+    @Column(name = "zip")
     private String zip;
 
     @ManyToMany(fetch = FetchType.EAGER)
