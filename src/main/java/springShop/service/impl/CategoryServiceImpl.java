@@ -30,4 +30,14 @@ public class CategoryServiceImpl implements CategoryService {
                     return categoryRepository.save(newCategory);
                 });
     }
+
+    @Override
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        categoryRepository.deleteById(id);
+    }
 }

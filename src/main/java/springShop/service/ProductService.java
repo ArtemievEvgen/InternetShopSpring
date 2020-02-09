@@ -1,21 +1,21 @@
 package springShop.service;
 
 
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.data.jpa.domain.Specification;
+import springShop.entity.Account;
 import springShop.entity.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
 
     Product update(Product newProduct, Integer id);
 
-    List<Product> findAll();
+    List<Product> findAll(Specification<Product> specification);
 
-    Optional<Product> findProductById(Integer id);
+    Object findById(Integer id);
 
-    Product saveProduct( Product newProduct);
+    Product save(Product newProduct);
 
-    void deleteProduct(@PathVariable Integer id);
+    void deleteById(Integer id);
 }

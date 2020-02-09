@@ -15,11 +15,11 @@ import java.util.List;
 public class OrderItemController {
 
     @Autowired
-    private OrderItemRepository orderItemRepository;
+    private OrderItemService orderItemService;
 
     @GetMapping
     public List<OrderItem> getAll() {
-        return orderItemRepository.findAll();
+        return orderItemService.findAll();
     }
 
 }

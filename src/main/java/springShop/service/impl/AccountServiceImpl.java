@@ -1,8 +1,6 @@
 package springShop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,19 +16,13 @@ import springShop.entity.Role;
 import springShop.repository.AccountRepository;
 import springShop.service.AccountService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.text.MessageFormat;
-import java.util.*;
-import java.util.function.Predicate;
-
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class AccountServiceImpl implements AccountService,UserDetailsService {
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Autowired
     AccountRepository accountRepository;
@@ -91,8 +83,19 @@ public class AccountServiceImpl implements AccountService,UserDetailsService {
                 });
     }
 
+    @Override
     public Account findById(Integer id) {
         return accountRepository.findById(id).orElse(null);
     }
 
+
+    @Override
+    public void deleteById(Integer id) {
+        accountRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Account> findAll(Specification<Account> specification) {
+        return accountRepository.findAll(specification);
+    }
 }

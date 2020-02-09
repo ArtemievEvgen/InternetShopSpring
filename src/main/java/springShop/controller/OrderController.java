@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springShop.entity.Order;
 import springShop.repository.OrderRepository;
+import springShop.service.OrderService;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -16,19 +17,19 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAll() {
-        return new ResponseEntity<>(orderRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(orderService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<?> findOne (@PathVariable Integer Id) {
-        return new ResponseEntity<>(orderRepository.findById(Id), HttpStatus.OK) ;
+    public ResponseEntity<?> findOne (@PathVariable Integer id) {
+        return new ResponseEntity<>(orderService.findById(id), HttpStatus.OK) ;
     }
 
     @DeleteMapping("/{id}")
-    void deleteOrder(@PathVariable Integer id) {orderRepository.deleteById(id);
+    void deleteOrder(@PathVariable Integer id) {orderService.deleteById(id);
     }
 }

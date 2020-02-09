@@ -44,40 +44,32 @@ import javax.validation.Valid;
 //        return "redirect:/";
 //    }
 //}
-
-@RestController
-@RequestMapping
-public class RegistrationController {
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-//    @GetMapping("/registration")
-//    public String registration(Model model) {
-//        model.addAttribute("accountForm", new Account());
 //
-//        return "registration";
+//@RestController
+//@RequestMapping
+//public class RegistrationController {
+//    @Autowired
+//    private AccountService accountService;
+//
+//    @Autowired
+//    private SecurityService securityService;
+//
+//    @Autowired
+//    private UserValidator userValidator;
+//
+//    @PostMapping("/login")
+//    public String login(Model model, String error, String logout) {
+//        if (error != null)
+//            model.addAttribute("error", "Your username and password is invalid.");
+//
+//        if (logout != null)
+//            model.addAttribute("message", "You have been logged out successfully.");
+//
+//        return "login";
 //    }
-
-
-    @PostMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
-    }
-
-    @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
-        return "welcome";
-    }
-}
+//
+//    @GetMapping({"/", "/welcome"})
+//    public String welcome(Model model) {
+//        return "welcome";
+//    }
+//}

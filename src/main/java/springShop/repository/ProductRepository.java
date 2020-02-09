@@ -2,6 +2,7 @@ package springShop.repository;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,27 +17,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 
-    @Query("SELECT u FROM Product u WHERE u.price >= :paramPrice")
-    List<Product> minPriceList(@Param("paramPrice") Double price);
 
-    @Query("SELECT u FROM Product u WHERE u.price <= :paramPrice")
-    List<Product> maxPriceList(@Param("paramPrice") Double price);
-
-    @Query("SELECT u FROM Product u WHERE u.price = :paramPrice")
-    List<Product> eqPriceList(@Param("paramPrice") Double price);
 
 //    @Query("SELECT u FROM Product u WHERE u.price = :paramPrice1 AND :parammPrice2 >= u.price")
 //    List<Product> intervalPriceList(@Param("paramPrice") Double price);
 //
       // @Query("SELECT u FROM Product u WHERE u.category = :paramCategory")
     // @Query("SELECT u FROM Product u JOIN Category c ON u.category = c WHERE c = :paramCategory")
-    @Query("SELECT u FROM Product u WHERE u.category = (SELECT p FROM Category p WHERE p.name = :paramCategory)")
-    List<Product> categoryList(@Param("paramCategory") String category);
 
-    @Query("SELECT u FROM Product u WHERE u.producer = (SELECT p FROM Producer p WHERE p.name = :paramProducer)")
-    List<Product> producerList(@Param("paramProducer") String producer);
 //       @Query("SELECT u FROM Product u WHERE u.producer = :paramProducer")
 //    List<Product> producerList(@Param("paramProducer") Producer producer);
 

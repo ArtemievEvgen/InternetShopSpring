@@ -6,6 +6,7 @@ import springShop.entity.Category;
 import springShop.entity.Producer;
 import springShop.repository.ProducerRepository;
 import springShop.repository.ProductRepository;
+import springShop.service.ProducerService;
 import springShop.service.impl.ProducerServiceImpl;
 
 import javax.annotation.security.RolesAllowed;
@@ -15,19 +16,19 @@ import java.util.List;
 @RequestMapping("/producer")
 public class ProducerController {
     @Autowired
-    private ProducerRepository producerRepository;
+    private ProducerService producerService;
 
     @GetMapping
     public List<Producer> getAll() {
-        return producerRepository.findAll();
+        return producerService.findAll();
     }
 
     @PostMapping
     public Producer newProducer(@RequestBody Producer newProducer) {
-        return producerRepository.save(newProducer); }
+        return producerService.save(newProducer); }
 
     @DeleteMapping("/{producerId}")
     void deleteProducer(@PathVariable Integer id) {
-        producerRepository.deleteById(id);
+        producerService.deleteById(id);
     }
 }

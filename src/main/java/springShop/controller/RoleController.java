@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import springShop.entity.Account;
 import springShop.entity.Role;
 import springShop.repository.RoleRepository;
+import springShop.service.RoleService;
 import springShop.service.impl.RoleServiceImpl;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,10 +15,10 @@ import java.util.List;
 @RequestMapping("/role")
 public class RoleController {
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleService roleService;
 
     @GetMapping
     public List<Role> getAll() {
-        return roleRepository.findAll();
+        return roleService.findAll();
     }
 }

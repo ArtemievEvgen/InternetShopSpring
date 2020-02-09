@@ -27,22 +27,13 @@ public class AccountController {
     UserValidator userValidator;
     @Autowired
     AccountService accountService;
-    @Autowired
-    AccountRepository accountRepository;
-
-    @GetMapping("/signup")
-    public String showSignUpForm(Account account) {
-        return "add-account";
-    }
-
-
 
     @PostMapping("/registration")
-    public HttpStatus registration(@RequestBody Account accountForm, BindingResult bindingResult) {
+    public String registration(@RequestBody Account accountForm, BindingResult bindingResult) {
         userValidator.validate(accountForm, bindingResult);
         accountService.save(accountForm);
         securityService.autoLogin(accountForm.getUsername(), accountForm.getPasswordConfirm());
-        return HttpStatus.OK;
+        return "redirect:/welcome";
     }
 
     @RolesAllowed("ROLE_ADMIN")
@@ -54,8 +45,10 @@ public class AccountController {
                 .where(firstName == null ? null : AccountSpecification.firstNameContains(firstName))
                 // lastName from parameter
                 .and(lastName == null ? null : AccountSpecification.lastNameContains(lastName));
-        return accountRepository.findAll(specification);
+        return accountService.findAll(specification);
     }
+
+
 
     @RolesAllowed("ROLE_ADMIN")
     @GetMapping("/{id}")
@@ -71,7 +64,6 @@ public class AccountController {
         Account updatedAccount = accountService.update(newAccount,id);
         return updatedAccount;
     }
-
     @RolesAllowed("ROLE_ADMIN")
     @PutMapping("/admin/{id}")
     public Account updateAdminAccount(@RequestBody Account newAccount, @PathVariable Integer id) {
@@ -81,8 +73,8 @@ public class AccountController {
 
     @RolesAllowed("ROLE_ADMIN")
     @DeleteMapping("/{id}")
-   public HttpStatus deleteAccount(@PathVariable Integer id) {
-        accountRepository.deleteById(id);
-        return null;
+   public HttpStatus deleteById(@PathVariable Integer id) {
+        accountService.deleteById(id);
+        return HttpStatus.OK;
     }
 }

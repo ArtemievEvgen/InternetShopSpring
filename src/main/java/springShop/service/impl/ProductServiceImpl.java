@@ -1,13 +1,18 @@
 package springShop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import springShop.entity.Account;
+import springShop.entity.Category;
+import springShop.entity.Producer;
 import springShop.entity.Product;
+import springShop.repository.CategoryRepository;
+import springShop.repository.ProducerRepository;
 import springShop.repository.ProductRepository;
 import springShop.service.ProductService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -20,23 +25,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAll() {
-       return productRepository.findAll();
+    public List<Product> findAll(Specification<Product> specification) {
+        return productRepository.findAll(specification);
     }
 
     @Override
-    public Optional<Product> findProductById(Integer id) {
+    public Object findById(Integer id) {
         return productRepository.findById(id);
     }
 
     @Override
-    public Product saveProduct(Product newProduct) {
-        return  productRepository.save(newProduct);
+    public Product save(Product newProduct) {
+        return productRepository.save(newProduct);
     }
 
     @Override
-    public void deleteProduct(Integer id) {
+    public void deleteById(Integer id) {
         productRepository.deleteById(id);
     }
-
 }

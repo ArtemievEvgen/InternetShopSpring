@@ -1,6 +1,9 @@
 package springShop.service;
 
+import org.springframework.data.jpa.domain.Specification;
 import springShop.entity.Account;
+
+import java.util.List;
 
 public interface AccountService  {
     void save(Account account);
@@ -11,4 +14,7 @@ public interface AccountService  {
 
     public Account findById(Integer id);
 
+    void deleteById(Integer id);
+
+    List<Account> findAll(Specification<Account> specification);
 }

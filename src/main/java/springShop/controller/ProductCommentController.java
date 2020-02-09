@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import springShop.entity.Producer;
 import springShop.entity.ProductComment;
 import springShop.repository.ProductCommentRepository;
+import springShop.service.ProductCommentService;
 import springShop.service.impl.ProductCommentsServiceImpl;
 
 
@@ -15,20 +16,20 @@ import java.util.List;
 @RequestMapping("/productComments")
 public class ProductCommentController {
     @Autowired
-    private ProductCommentRepository productCommentRepository;
+    private ProductCommentService productCommentService;
 
     @GetMapping
     public List<ProductComment> getAll() {
-        return productCommentRepository.findAll();
+        return productCommentService.findAll();
     }
 
     @PostMapping
     public ProductComment newProductComment(@RequestBody ProductComment newProductComment) {
-        return  productCommentRepository.save(newProductComment);
+        return  productCommentService.save(newProductComment);
     }
 
     @DeleteMapping("/{id}")
     void deleteProductComment(@PathVariable Integer id) {
-        productCommentRepository.deleteById(id);
+        productCommentService.deleteById(id);
     }
 }
