@@ -1,20 +1,17 @@
 package springShop.repository;
 
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import springShop.entity.Account;
-import springShop.entity.Category;
 import springShop.entity.Producer;
 import springShop.entity.Product;
 
+import javax.persistence.criteria.ListJoin;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
@@ -46,4 +43,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     //    List<Product> findAllByPrice (List <Double> price);
 
+    @Query("SELECT u FROM Product u WHERE u.producer = (SELECT p FROM Producer p WHERE p.name = :producer)")
+    ListJoin<Product, Producer> producerList(@Param("producer") String producer);
+
+//    List<Product> findAll();
 }

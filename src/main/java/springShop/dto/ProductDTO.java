@@ -10,13 +10,13 @@ public class ProductDTO extends RepresentationModel<ProductDTO> {
     private String description;
     private String imageLink;
     private Double price;
-    private Category category;
-    private Producer producer;
+    private CategoryDTO category;
+    private ProducerDTO producer;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(String description, String imageLink, Double price, Category category, Producer producer) {
+    public ProductDTO(String description, String imageLink, Double price, CategoryDTO category, ProducerDTO producer) {
         this.description = description;
         this.imageLink = imageLink;
         this.price = price;
@@ -48,19 +48,19 @@ public class ProductDTO extends RepresentationModel<ProductDTO> {
         this.price = price;
     }
 
-    public Category getCategory() {
+    public CategoryDTO getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryDTO category) {
         this.category = category;
     }
 
-    public Producer getProducer() {
+    public ProducerDTO getProducer() {
         return producer;
     }
 
-    public void setProducer(Producer producer) {
+    public void setProducer(ProducerDTO producer) {
         this.producer = producer;
     }
 }

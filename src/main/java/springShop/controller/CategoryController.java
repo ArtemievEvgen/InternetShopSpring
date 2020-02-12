@@ -3,7 +3,6 @@ package springShop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springShop.entity.Category;
-import springShop.repository.CategoryRepository;
 import springShop.service.CategoryService;
 
 import javax.annotation.security.RolesAllowed;
