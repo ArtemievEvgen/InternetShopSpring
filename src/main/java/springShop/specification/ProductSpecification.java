@@ -32,15 +32,13 @@ public class ProductSpecification {
     }
 
     public static Specification<Product> categoryContains(String expression) {
-        return (root, query, builder) -> {
-            Join<Product, Category> categoryJoin = root.join("category");
-            return builder.like(categoryJoin.<String>get("name"), contains(expression));
-        };
+        return (root, query, builder) -> builder.like(root.<String>get("category").get("name"), contains(expression));
     }
+
     public static Specification<Product> producerContains(String expression) {
         return (root, query, builder) -> {
             Join<Product, Producer> producerJoin = root.join("producer");
-            return builder.like(producerJoin.<String>get("name"), contains(expression));
+            return builder.like(producerJoin.get("name"), contains(expression));
         };
     }
 

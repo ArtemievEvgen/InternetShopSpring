@@ -1,13 +1,10 @@
 package springShop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-import springShop.dto.ProductListRequest;
 import springShop.entity.Product;
 import springShop.repository.ProductRepository;
 import springShop.service.ProductService;
@@ -21,9 +18,6 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-
-    @Autowired
-    private ProductRepository productRepository;
     @Autowired
     private ProductService productService;
 

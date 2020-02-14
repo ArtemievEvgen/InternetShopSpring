@@ -37,7 +37,6 @@ public class AccountDTO extends RepresentationModel<AccountDTO> {
         this.userName = userName;
     }
 
-
     public String getFirstName() {
         return firstName;
     }
