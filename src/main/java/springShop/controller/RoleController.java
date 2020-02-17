@@ -1,12 +1,11 @@
 package springShop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import springShop.entity.Account;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import springShop.entity.Role;
-import springShop.repository.RoleRepository;
 import springShop.service.RoleService;
-import springShop.service.impl.RoleServiceImpl;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;

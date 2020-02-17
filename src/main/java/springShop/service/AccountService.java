@@ -17,4 +17,5 @@ public interface AccountService  {
     void deleteById(Integer id);
 
     List<Account> findAll(Specification<Account> specification);
+
 }

@@ -8,21 +8,16 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import springShop.entity.Account;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import springShop.securingweb.models.AuthenticationRequest;
 import springShop.securingweb.models.AuthenticationResponse;
 import springShop.securingweb.util.JwtUtil;
-import springShop.service.AccountService;
-import springShop.service.SecurityService;
 import springShop.service.impl.AccountServiceImpl;
-import springShop.validator.UserValidator;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
-import java.security.Principal;
 @Logger
 @RestController
 class SignInController {

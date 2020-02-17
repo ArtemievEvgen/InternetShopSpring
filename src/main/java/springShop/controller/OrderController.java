@@ -3,13 +3,17 @@ package springShop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+import springShop.entity.Account;
 import springShop.entity.Order;
-import springShop.repository.OrderRepository;
 import springShop.service.OrderService;
 
 import javax.annotation.security.RolesAllowed;
-import java.util.List;
+import java.security.Principal;
 
 @RolesAllowed("ROLE_ADMIN")
 @RestController
@@ -29,7 +33,20 @@ public class OrderController {
         return new ResponseEntity<>(orderService.findById(id), HttpStatus.OK) ;
     }
 
+    @PostMapping
+    public HttpStatus createOrder( @RequestBody Order orderForm){
+        orderService.save(orderForm);
+        return HttpStatus.OK;
+    }
+
+    @PutMapping
+    public HttpStatus updateorder(@RequestBody Order updateOrder, @PathVariable Integer id){
+        orderService.update(updateOrder,id);
+        return HttpStatus.OK;
+    }
+
     @DeleteMapping("/{id}")
     void deleteOrder(@PathVariable Integer id) {orderService.deleteById(id);
     }
+
 }

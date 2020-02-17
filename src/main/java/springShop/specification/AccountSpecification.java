@@ -4,8 +4,8 @@ import org.springframework.data.jpa.domain.Specification;
 import springShop.entity.Account;
 
 import java.text.MessageFormat;
-
 public class AccountSpecification {
+
     public static Specification<Account> firstNameContains(String expression) {
         return (root, query, builder) -> builder.like(root.get("firstName"), contains(expression));
     }

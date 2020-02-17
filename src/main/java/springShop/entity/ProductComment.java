@@ -1,8 +1,15 @@
 package springShop.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "product_comments")
 
 public class ProductComment {
@@ -13,37 +20,7 @@ public class ProductComment {
     private Integer idProduct;
     @Column(name = "id_account")
     private Integer idAccount;
+    @Column(name = "comment")
     private String comment;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public int getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(Integer idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public int getIdAccount() {
-        return idAccount;
-    }
-
-    public void setIdAccount(Integer idAccount) {
-        this.idAccount = idAccount;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }

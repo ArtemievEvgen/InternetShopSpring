@@ -23,6 +23,7 @@ public interface AccountRepository extends  JpaRepository<Account, Integer>, Jpa
    @Query("SELECT u FROM Account u WHERE u.id = :paramId")
    List<Account> accountList(@Param("paramId") Integer id);
 
+
     //   @Query("SELECT u FROM Account u WHERE u.roles = (SELECT p FROM Role p WHERE p.name = :paramRole)")
 //   List<Account> accountRoleList(@Param("paramRole") String role);
 }

@@ -2,7 +2,6 @@ package springShop.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import springShop.entity.Category;
 import springShop.entity.Producer;
 import springShop.entity.Product;
 
@@ -13,8 +12,6 @@ import java.util.Arrays;
 
 @Component
 public class ProductSpecification {
-
-
 
     public static Specification<Product> descriptionContains(String expression) {
         return (root, query, builder) -> builder.like(root.get("description"), contains(expression));
@@ -45,10 +42,6 @@ public class ProductSpecification {
     private static String contains(String expression) {
         return MessageFormat.format("%{0}%", expression);
     }
-
-
-    ///////////////////////////////////////////////////
-
 
 }
 

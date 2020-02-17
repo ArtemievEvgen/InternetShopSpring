@@ -1,10 +1,20 @@
 package springShop.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Set;
 
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "orders")
 public class Order {
 
@@ -14,55 +24,18 @@ public class Order {
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_account")
-    private Account account;
+    private Account idAccount;
 
     @Column(name = "created")
-    private String created;
+    private Timestamp created;
 
-    @Column(name = "checked")
-    private String checked;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Status> statuses;
 
-//
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "order_product")
 //    private Set<Product> products ;
 
-    public Order() {
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getAccount() {
-        return account.getId();
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getChecked() {
-        return checked;
-    }
-
-    public void setChecked(String checked) {
-        this.checked = checked;
-    }
-//
 //    public Set<Product> getProducts() {
 //        return products;
 //    }
