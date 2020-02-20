@@ -11,6 +11,8 @@ import springShop.service.ProductService;
 import springShop.specification.ProductSpecification;
 
 import javax.annotation.security.RolesAllowed;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @RolesAllowed("ROLE_ADMIN")
@@ -23,19 +25,27 @@ public class ProductController {
 
 
     @GetMapping
-    public List<Product> getAll(@RequestParam(required = false) String description,
-                                @RequestParam(required = false) String name,
-                                @RequestParam(required = false) Double price,
-                                @RequestParam(required = false) String category,
-                                @RequestParam(required = false) String producer) {
-        Specification<Product> specification = Specification
-                .where(description == null ? null : ProductSpecification.descriptionContains(description))
-                .and(name == null ? null : ProductSpecification.nameContains(name))
-                .and(price == null ? null : ProductSpecification.priceIn(price))
-                .and(category == null ? null : ProductSpecification.categoryContains(category))
-                .and(producer == null ? null : ProductSpecification.producerContains(producer));
+    public List<Product> getAll(
+            @RequestParam(required = false) List<String> description,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double price,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String producer) {
+        Specification<Product> specification =
+                Specification.where(name == null ? null : ProductSpecification.nameContains(name))
+                        .and(price == null ? null : ProductSpecification.priceIn(price))
+                        .and(category == null ? null : ProductSpecification.categoryContains(category))
+                        .and(producer == null ? null : ProductSpecification.producerContains(producer));
+        if (description != null) {
+            for (String s : description) {
+                specification.and(ProductSpecification.descriptionContains(s));
+            }
+        }
+
         return productService.findAll(specification);
+
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Integer id) {

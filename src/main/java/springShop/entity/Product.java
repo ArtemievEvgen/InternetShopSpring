@@ -30,9 +30,6 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_producer")
     private Producer producer;
-//
-//   @ManyToMany(fetch = FetchType.EAGER)
-//    private Set<Order> order;
 
     public String getCategory() {
         return category.getName();

@@ -4,7 +4,6 @@ package springShop.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -22,7 +21,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_account")
     private Account idAccount;
 
@@ -31,6 +30,9 @@ public class Order {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Status> statuses;
+
+//    public Integer getProduct() {
+//    }
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "order_product")

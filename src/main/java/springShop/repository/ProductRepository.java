@@ -11,6 +11,7 @@ import springShop.entity.Producer;
 import springShop.entity.Product;
 
 import javax.persistence.criteria.ListJoin;
+import java.lang.instrument.ClassDefinition;
 import java.util.List;
 
 @Repository
@@ -45,6 +46,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     @Query("SELECT u FROM Product u WHERE u.producer = (SELECT p FROM Producer p WHERE p.name = :producer)")
     ListJoin<Product, Producer> producerList(@Param("producer") String producer);
+
 
 //    List<Product> findAll();
 }

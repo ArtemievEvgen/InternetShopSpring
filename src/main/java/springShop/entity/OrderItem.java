@@ -29,4 +29,18 @@ public class OrderItem {
     @Column( name = "count")
     private Integer count;
 
+
+//    public Integer getId(Order order) {
+//        return order.getId();
+//    }
+//    public Integer getOrder(Order order) {
+//        return order.getId();
+//    }
+//    public Integer getProduct( Product product) {
+//        return product.getId();
+//    }
+//
+//    public Product setId(OrderItem orderItem) {
+//    }
 }
+

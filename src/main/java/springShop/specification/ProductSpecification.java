@@ -14,19 +14,40 @@ import java.util.Arrays;
 public class ProductSpecification {
 
     public static Specification<Product> descriptionContains(String expression) {
+
         return (root, query, builder) -> builder.like(root.get("description"), contains(expression));
     }
+
+//
+//    public static Specification<Product> descriptionContains(List<String>... expression) {
+//        return (root, query, builder) -> builder.or(Arrays
+//                .stream( expression)
+//                .map(s -> builder.like(root.get("description"), contains(Arrays.toString(expression))))
+//                .toArray(Predicate[]::new));
+//    }
+
 
     public static Specification<Product> nameContains(String expression) {
         return (root, query, builder) -> builder.like(root.get("name"), contains(expression));
     }
 
-    public static Specification<Product> priceIn(Double... values) {
-        return (root, query, builder) -> builder.or(Arrays
-                .stream(values)
-                .map(value -> builder.equal(root.get("price"), value))
-                .toArray(Predicate[]::new));
-    }
+
+
+        public static Specification<Product> priceIn(Double... values) {
+            return (root, query, builder) -> builder.or(Arrays
+                    .stream(values)
+                    .map(s -> builder.equal(root.get("price"), s))
+                    .toArray(Predicate[]::new));
+        }
+
+//    public static Specification<Product> priceIn(ArrayList<Double>... values) {
+//
+//            return (root, query, builder) -> builder.or(Arrays
+//                    .stream(values)
+//                    .map(s -> builder.equal(root.get("price"), s))
+//                    .toArray(Predicate[]::new));
+//        }
+
 
     public static Specification<Product> categoryContains(String expression) {
         return (root, query, builder) -> builder.like(root.<String>get("category").get("name"), contains(expression));

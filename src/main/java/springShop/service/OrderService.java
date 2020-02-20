@@ -2,6 +2,10 @@ package springShop.service;
 
 
 import springShop.entity.Order;
+import springShop.entity.OrderItem;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 public interface OrderService {
 
@@ -11,7 +15,9 @@ public interface OrderService {
 
     void deleteById(Integer id);
 
-    void save(Order order);
+//    void save(ArrayList<Order> order);
 
-    void update(Order updateOrder,Integer id);
+   Optional<Order> update(Order updateOrder, Integer id);
+
+    void save(ArrayList<OrderItem> orderItems);
 }

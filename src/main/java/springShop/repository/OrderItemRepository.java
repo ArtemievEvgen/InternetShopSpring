@@ -7,4 +7,6 @@ import springShop.entity.OrderItem;
 @Repository
 public interface OrderItemRepository extends  JpaRepository<OrderItem, Integer> {
 
+//      void getTopByOrderByIdDesc(Integer id);
+
 }
